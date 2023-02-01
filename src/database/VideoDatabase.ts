@@ -34,4 +34,20 @@ public async insertVideo (newVideoDB:TVideoDB): Promise<void> {
     .connection(VideoDatabase.TABLE_VIDEOS)
     .insert(newVideoDB)
 }
+
+
+// =================================================================
+
+public async findDeleteVideoById(id: string | undefined):Promise<TVideoDB|undefined>{
+    const [ videoIdAlreadyExists ]: TVideoDB[] | undefined[] = await BaseDatabase
+    .connection
+    .where({ id })
+    
+    return videoIdAlreadyExists
+}
+public async insertDeleteVideo (newVideoDB:TVideoDB): Promise<void> {
+    await BaseDatabase
+    .connection(VideoDatabase.TABLE_VIDEOS)
+    .insert(newVideoDB)
+}
 }
