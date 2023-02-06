@@ -4,7 +4,7 @@ import {TVideoDB} from './types'
 // import { db } from './database/BaseDatabase'
 import { Video } from './models/Video'
 import { VideoDatabase } from './database/VideoDatabase'
-import { VideoController } from './database/controller/VideoController'
+import { VideoController } from './controller/VideoController'
 
 const app = express()
 
