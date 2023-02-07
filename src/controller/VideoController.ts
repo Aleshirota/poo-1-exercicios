@@ -2,6 +2,7 @@ import { Video } from "../models/Video"
 import { VideoDatabase } from "../database/VideoDatabase"
 import { Request,Response } from "express"
 import { VideoBusiness } from "../business/VideoBusiness"
+import { BaseError } from "../errors/BaseError"
 
 
 
@@ -43,16 +44,12 @@ export class VideoController {
                 res.status(200).send(output) //dado instanciado
             } catch (error) {
                 console.log(error)
-        
-                if (req.statusCode === 200) {
-                    res.status(500)
-                }
-        
-                if (error instanceof Error) {
-                    res.send(error.message)
-                } else {
-                    res.send("Erro inesperado")
-                }
+    
+                        if (error instanceof BaseError) {
+                            res.status(error.statusCode).send(error.message)
+                        } else {
+                            res.status(500).send("Erro inesperado")
+                        }
             }
         }
 
@@ -114,16 +111,12 @@ export class VideoController {
                 res.status(201).send(output) 
             } catch (error) {
                 console.log(error)
-        
-                if (req.statusCode === 200) {
-                    res.status(500)
-                }
-        
-                if (error instanceof Error) {
-                    res.send(error.message)
-                } else {
-                    res.send("Erro inesperado")
-                }
+    
+                        if (error instanceof BaseError) {
+                            res.status(error.statusCode).send(error.message)
+                        } else {
+                            res.status(500).send("Erro inesperado")
+                        }
             }
         }
 

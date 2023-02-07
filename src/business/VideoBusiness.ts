@@ -1,4 +1,5 @@
 import { VideoDatabase } from "../database/VideoDatabase"
+import { BadRequestError } from "../errors/BadRequestError"
 import { Video } from "../models/Video"
 
 
@@ -26,17 +27,17 @@ public createVideo = async (imput: any)=>{
         
     if (typeof id !== "string") {
        
-        throw new Error("'id' deve ser string")
+        throw new BadRequestError("'id' deve ser string")
     }
 
     if (typeof titulo !== "string") {
         
-        throw new Error("'titulo' deve ser string")
+        throw new BadRequestError("'titulo' deve ser string")
     }
 
     if (typeof duracao !== "string") {
         
-        throw new Error("'duracao' deve ser string")
+        throw new BadRequestError("'duracao' deve ser string")
     }
 
     // const [ videoDBExists ]: TVideoDB[] | undefined[] = await db("videos").where({ id })
@@ -45,7 +46,7 @@ public createVideo = async (imput: any)=>{
 
     if (videoDBExists) {
         
-        throw new Error("'id' já existe")
+        throw new BadRequestError("'id' já existe")
     }
 
     const newVideo = new Video(
