@@ -5,6 +5,8 @@ import {TVideoDB} from './types'
 import { Video } from './models/Video'
 import { VideoDatabase } from './database/VideoDatabase'
 import { VideoController } from './controller/VideoController'
+import { videoRouter } from './router/videoRouter'
+import { courseRouter } from './router/courseRouter'
 
 const app = express()
 
@@ -33,11 +35,10 @@ app.get("/ping", async (req: Request, res: Response) => {
     }
 })
 
-const videoController = new VideoController()
 
-app.get("/videos", videoController.getVideos )
+app.use("/users", videoRouter)
+app.use("/courses", courseRouter)
 
-app.post("/videos", videoController.createVideo )
 
 // ==========================Editar Videos=================================================
 

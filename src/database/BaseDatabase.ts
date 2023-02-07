@@ -1,4 +1,5 @@
 import { knex } from "knex"
+import { CourseDatabase } from "./CourseDatabase"
 
 
 export abstract class BaseDatabase{
@@ -16,6 +17,13 @@ export abstract class BaseDatabase{
         }
     }
 })
+
+public async updateBalanceById(id: string, newBalance: number) {
+    await BaseDatabase
+        .connection(CourseDatabase.TABLE_COURSES)
+        .update({ balance: newBalance })
+        .where({ id })
+}
 
 }
 
